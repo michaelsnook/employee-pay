@@ -1,0 +1,8 @@
+{% extends 'gifs/base.html' %}
+{% block body %}
+<ul>
+  {% for category in categories %}
+  <li>{{ category.category }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
