@@ -1,4 +1,16 @@
 {% extends 'gifs/base.html' %}
 {% block body %}
-<img src="{{ gif.href }}" alt="{{ gif.title }}" />
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2> {{ gif.title }} <small>category: {{ gif.category }}</h2>
+      <img class="img-responsive" src="{{ gif.href }}" alt="{{ gif.title }}" />
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block breadcrumbs %}
+<li><a href="/">categories</a></li>
+<li class="active"><a href="#">more {{ gif.category }}</a></li>
 {% endblock %}

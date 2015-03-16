@@ -2,8 +2,9 @@
 {% block body %}
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <ul>
+    <div class="col-md-12">
+      <h2>Categories</h2>
+      <ul class="list-unstyled">
         {% for category in categories %}
         <li>{{ category.category }}</li>
         {% endfor %}
