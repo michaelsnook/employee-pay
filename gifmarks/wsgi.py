@@ -11,4 +11,11 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gifmarks.settings")
 
 from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+#   Cling makes static files work on Heroku
+#
+
+from dj_static import Cling
+application = Cling(get_wsgi_application())
+
+#   otherwise comment the above 2 lines out and use this instead
+#   application = get_wsgi_application()

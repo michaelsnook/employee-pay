@@ -58,17 +58,6 @@ ROOT_URLCONF = 'gifmarks.urls'
 
 WSGI_APPLICATION = 'gifmarks.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -87,3 +76,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Parse database configuration from $DATABASE_URL for Heroku
+import dj_database_url
+
+db_config = dj_database_url.config()
+# Are we running locally or on heroku? set DBs accordingly
+DATABASES = { 'default' :  db_config if db_config != {} else {
+
+    #   for psql locally
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gifmarks',
+        'user': 'gifmarks',
+        'password': '',
+        'host': '127.0.0.1',
+        'port': '5432',
+
+    #   for sqlite in dev
+    #   'ENGINE': 'django.db.backends.sqlite3',
+    #   'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+    }
+
+}
+
+# The rest of these are Heroku instructions
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
