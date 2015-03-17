@@ -6,7 +6,7 @@
       <h2>Categories</h2>
       <ul class="list-unstyled">
         {% for category in categories %}
-        <li>{{ category.category }}</li>
+        <li><a href="{% url 'gifmarks_app.views.random_gif_from_category' category.category %}">{{ category.category }}</a></li>
         {% endfor %}
       </ul>
     </div>

@@ -12,5 +12,5 @@
 
 {% block breadcrumbs %}
 <li><a href="/">categories</a></li>
-<li class="active"><a href="#">more {{ gif.category }}</a></li>
+<li class="active"><a href="{% url 'gifmarks_app.views.random_gif_from_category' gif.category %}">more {{ gif.category }}</a></li>
 {% endblock %}

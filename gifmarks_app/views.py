@@ -33,3 +33,7 @@ def add_a_gif(request):
             )
 
         return HttpResponseRedirect(reverse('gifmarks_app.views.show_a_gif', args=(gif.id,)))
+
+def random_gif_from_category(request, category):
+    gif_id = Null if category is None else  Giflink.objects.filter(category=category).order_by('?')[0].pk
+    return HttpResponseRedirect(reverse('gifmarks_app.views.show_a_gif', args=(gif_id,)))
