@@ -26,11 +26,12 @@ def add_a_gif(request):
         try:
             gif = Giflink.objects.get(href=request.POST['href'])
         except Giflink.DoesNotExist:
-            gif, created = Giflink.create(
+            gif = Giflink(
                 href = request.POST['href'] if request.POST['href'] else None,
                 title = request.POST['title'] if request.POST['title'] else None,
                 category = request.POST['category'] if request.POST['category'] else None,
             )
+            gif.save()
 
         return HttpResponseRedirect(reverse('gifmarks_app.views.show_a_gif', args=(gif.id,)))
 
