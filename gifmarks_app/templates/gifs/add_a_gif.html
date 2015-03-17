@@ -1,0 +1,45 @@
+{% extends 'gifs/base.html' %}
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Add a GIF!</h2>
+      {% if error_message %}<h6>{{ error_message }}</h6>{% endif %}
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form action="{% url 'gifmarks_app.views.add_a_gif' %}" method="post">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="input-href">The link of your GIF *</label>
+          <input id="input-href" type="text" name="href" required value="{{ partial.href }}"
+          placeholder="http://link.to/your.gif (required)" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+          <label for="input-category">Select a category</label>
+          <input if="input-category" type="text" name="category" value="{{ partial.category }}"
+          placeholder="e.g.: gameshows" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+          <label for="input-title">Give it a title</label>
+          <textarea if="input-title" name="title" placeholder="A worthy title for your GIF"
+          class="form-control input-lg" rows="4">{{ partial.title }}</textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Submit GIF</button>
+        </div>
+
+      </form>
+    </div>
+  </div><!-- .row -->
+</div>
+
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}

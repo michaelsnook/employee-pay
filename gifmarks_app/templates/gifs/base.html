@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="{% static 'gifs/app.css' %}">
 </head>
 <body>
-
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -22,11 +22,17 @@
         </button>
         <a class="navbar-brand" href="/">Bookmarks for GIFs</a>
       </div>
-      <div id="navbar" class="collapse navbar-collapse">
+
+      <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           {% block breadcrumbs %}{% endblock %}
         </ul>
+        <div class="navbar-form navbar-right">
+          <a href="{% url 'gifmarks_app.views.add_a_gif' %}"
+          class="btn btn-success">Add GIF</a>
+        </div>
       </div><!--/.nav-collapse -->
+
     </div>
   </nav>
 <section class="body">

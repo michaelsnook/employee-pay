@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 from gifmarks_app.models import Giflink
 
 
@@ -11,6 +13,23 @@ def index(request):
                 })
 
 def show_a_gif(request, gif_id):
-    gif = Giflink.objects.get(pk=gif_id)
+    gif = get_object_or_404(Giflink, pk=gif_id)
 
     return render(request, 'gifs/show_a_gif.html', { 'gif': gif })
+
+def add_a_gif(request):
+    if request.method == 'GET':
+        categories = Giflink.objects.values("category")
+        return render(request, 'gifs/add_a_gif.html', { 'categories': categories })
+
+    if request.method == 'POST':
+        try:
+            gif = Giflink.objects.get(href=request.POST['href'])
+        except Giflink.DoesNotExist:
+            gif, created = Giflink.create(
+                href = request.POST['href'] if request.POST['href'] else None,
+                title = request.POST['title'] if request.POST['title'] else None,
+                category = request.POST['category'] if request.POST['category'] else None,
+            )
+
+        return HttpResponseRedirect(reverse('gifmarks_app.views.show_a_gif', args=(gif.id,)))
