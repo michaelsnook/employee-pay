@@ -86,9 +86,9 @@ DATABASES = { 'default' :  db_config if db_config != {} else {
 
     #   for psql locally
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gifmarks',
-        'user': 'gifmarks',
-        'password': '',
+        'NAME': 'employee_pay',
+        'user': 'employee_pay',
+        'password': 'test_password',
         'host': '127.0.0.1',
         'port': '5432',
 
